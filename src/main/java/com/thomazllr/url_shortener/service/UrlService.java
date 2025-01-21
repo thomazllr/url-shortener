@@ -1,6 +1,5 @@
 package com.thomazllr.url_shortener.service;
 
-import com.thomazllr.url_shortener.model.Source;
 import com.thomazllr.url_shortener.model.Url;
 import com.thomazllr.url_shortener.model.dto.UrlDto;
 import com.thomazllr.url_shortener.repository.UrlRepository;
@@ -8,7 +7,6 @@ import com.thomazllr.url_shortener.service.validator.UrlValidator;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.yaml.snakeyaml.events.Event;
 
 import java.util.List;
 
@@ -31,7 +29,7 @@ public class UrlService {
         url.setId(shortId);
         url.setUrl(request.url());
         url.setShortUrl("localhost:8080/" + shortId);
-        url.setSource(Source.OTHER);
+        url.setSource(validator.getUrlSource(request.url()));
         return repository.save(url);
     }
 
