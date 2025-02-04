@@ -24,6 +24,8 @@ public class Url {
 
     private Source source;
 
+    private Integer count;
+
     @CreatedDate
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -31,11 +33,12 @@ public class Url {
     public Url() {
     }
 
-    public Url(String id, String url, String shortUrl, Source source, LocalDateTime createdAt) {
+    public Url(String id, String url, String shortUrl, Source source, Integer count, LocalDateTime createdAt) {
         this.id = id;
         this.url = url;
         this.shortUrl = shortUrl;
         this.source = source;
+        this.count = count;
         this.createdAt = createdAt;
     }
 
@@ -77,5 +80,13 @@ public class Url {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
     }
 }

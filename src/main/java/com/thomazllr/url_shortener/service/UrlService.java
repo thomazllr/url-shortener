@@ -29,6 +29,7 @@ public class UrlService {
         url.setId(shortId);
         url.setUrl(request.url());
         url.setShortUrl("localhost:8080/" + shortId);
+        url.setCount(0);
         url.setSource(validator.getUrlSource(request.url()));
         return repository.save(url);
     }
@@ -38,6 +39,10 @@ public class UrlService {
     }
 
     public Url findById(String id) {
-        return repository.findById(id).orElse(null);
+        Url url = repository.findById(id).orElse(null);
+        assert url != null;
+        url.setCount(url.getCount() + 1);
+        repository.save(url);
+        return url;
     }
 }
