@@ -13,14 +13,14 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/url")
+@RequestMapping("/")
 public class UrlController implements GenericController {
 
     @Autowired
     private UrlService service;
 
-    @PostMapping
-    public ResponseEntity<UrlDto> save(@RequestBody UrlDto url) {
+    @PostMapping()
+    public ResponseEntity<UrlDto> save(@RequestParam UrlDto url) {
         var entity = service.saveUrl(url);
         var location = generateHeaderLocation(entity.getId());
         return ResponseEntity
@@ -28,7 +28,7 @@ public class UrlController implements GenericController {
                 .body(new UrlDto(entity.getShortUrl()));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<Void> redirect(@PathVariable String id) {
         var url = service.findById(id);
         HttpHeaders headers = new HttpHeaders();
